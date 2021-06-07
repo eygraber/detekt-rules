@@ -29,6 +29,6 @@ mavenPublish {
     sonatypeHost = SonatypeHost.S01
 
     nexus {
-        stagingProfile = null
+        stagingProfile = "com.eygraber"
     }
 }
