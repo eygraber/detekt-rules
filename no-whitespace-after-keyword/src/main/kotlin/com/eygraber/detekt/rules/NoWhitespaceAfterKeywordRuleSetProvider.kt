@@ -4,7 +4,7 @@ import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
 
-class EygraberRuleSetProvider : RuleSetProvider {
+class NoWhitespaceAfterKeywordRuleSetProvider : RuleSetProvider {
   override val ruleSetId = "eygraber"
 
   override fun instance(config: Config) = RuleSet(

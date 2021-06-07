@@ -1,1 +1,1 @@
-com.eygraber.detekt.rules.EygraberRuleSetProvider
+com.eygraber.detekt.rules.NoWhitespaceAfterKeywordRuleSetProvider
