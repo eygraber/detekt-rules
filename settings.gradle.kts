@@ -1,2 +1,2 @@
 rootProject.name = "detekt-rules"
-include("no-whitespace-after-keyword")
+include("formatting")
