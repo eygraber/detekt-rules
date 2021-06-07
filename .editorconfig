@@ -1,0 +1,2 @@
+[**/test/**.kt]
+ktlint_ignore_back_ticked_identifier=true

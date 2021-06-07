@@ -1,7 +1,7 @@
 package com.eygraber.detekt.rules.formatting.keyword
 
-import com.eygraber.detekt.rules.formatting.NoWhitespaceAfterKeyword
 import com.eygraber.detekt.rules.assertFormat
+import com.eygraber.detekt.rules.formatting.NoWhitespaceAfterKeyword
 import io.gitlab.arturbosch.detekt.test.TestConfig
 import io.gitlab.arturbosch.detekt.test.assertThat
 import io.gitlab.arturbosch.detekt.test.lint
