@@ -5,7 +5,7 @@ import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
 
 class NoWhitespaceAfterKeywordRuleSetProvider : RuleSetProvider {
-  override val ruleSetId = "eygraber"
+  override val ruleSetId = "no-whitespace-after-keyword"
 
   override fun instance(config: Config) = RuleSet(
     ruleSetId,
