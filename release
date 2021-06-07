@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+./gradlew :no-whitespace-after-keyword:clean :no-whitespace-after-keyword:build :core:publish --no-daemon --no-parallel && \
+
+if ! grep -q -- "VERSION_NAME=.*-SNAPSHOT" gradle.properties;
+then
+./gradlew closeAndReleaseRepository
+else
+echo "Nothing else to do for a snapshot"
+fi
