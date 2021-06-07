@@ -27,4 +27,8 @@ tasks.withType<KotlinCompile>().configureEach {
 
 mavenPublish {
     sonatypeHost = SonatypeHost.S01
+
+    nexus {
+        stagingProfile = null
+    }
 }
