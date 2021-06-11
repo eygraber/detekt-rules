@@ -51,11 +51,7 @@ class NoWhitespaceAfterKeyword(
       }
     }
 
-    expression.`else`?.firstChild?.let { elseChild ->
-      if(elseChild.text == "if") {
-        visitIfExpression(KtIfExpression(elseChild.parent.node))
-      }
-    }
+    super.visitIfExpression(expression)
   }
 
   override fun visitForExpression(expression: KtForExpression) {

@@ -1,6 +1,6 @@
 package com.eygraber.detekt.rules.style
 
-import com.pinterest.ktlint.core.KtLint
+import com.pinterest.ktlint.core.ast.lineIndent
 import io.gitlab.arturbosch.detekt.api.CodeSmell
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.Debt
@@ -31,17 +31,16 @@ class NewlineForMultilineKeyword(
       if(!elseKeyword.prevSibling.text.startsWith('\n')) {
         report(elseKeyword)
 
-        val indentSize = elseKeyword.node.getUserData(KtLint.EDITOR_CONFIG_USER_DATA_KEY)?.indentSize ?: 2
-        if(indentSize != -1) {
-          withAutoCorrect {
-            elseKeyword.prevSibling.node.treeParent.replaceChild(
-              elseKeyword.prevSibling.node,
-              PsiWhiteSpaceImpl("\n${" ".repeat(indentSize)}")
-            )
-          }
+        withAutoCorrect {
+          elseKeyword.prevSibling.node.treeParent.replaceChild(
+            elseKeyword.prevSibling.node,
+            PsiWhiteSpaceImpl("\n${expression.node.lineIndent()}")
+          )
         }
       }
     }
+
+    super.visitIfExpression(expression)
   }
 
   override fun visitTryExpression(expression: KtTryExpression) {
@@ -52,14 +51,11 @@ class NewlineForMultilineKeyword(
         report(catch)
 
         withAutoCorrect {
-          val indentSize = catch.node.getUserData(KtLint.EDITOR_CONFIG_USER_DATA_KEY)?.indentSize ?: 2
-          if(indentSize != -1) {
-            autoCorrects += {
-              catch.prevSibling.node.treeParent.replaceChild(
-                catch.prevSibling.node,
-                PsiWhiteSpaceImpl("\n${" ".repeat(indentSize)}")
-              )
-            }
+          autoCorrects += {
+            catch.prevSibling.node.treeParent.replaceChild(
+              catch.prevSibling.node,
+              PsiWhiteSpaceImpl("\n${expression.node.lineIndent()}")
+            )
           }
         }
       }
@@ -70,14 +66,11 @@ class NewlineForMultilineKeyword(
         report(finallyBlock)
 
         withAutoCorrect {
-          val indentSize = finallyBlock.node.getUserData(KtLint.EDITOR_CONFIG_USER_DATA_KEY)?.indentSize ?: 2
-          if(indentSize != -1) {
-            autoCorrects += {
-              finallyBlock.prevSibling.node.treeParent.replaceChild(
-                finallyBlock.prevSibling.node,
-                PsiWhiteSpaceImpl("\n${" ".repeat(indentSize)}")
-              )
-            }
+          autoCorrects += {
+            finallyBlock.prevSibling.node.treeParent.replaceChild(
+              finallyBlock.prevSibling.node,
+              PsiWhiteSpaceImpl("\n${expression.node.lineIndent()}")
+            )
           }
         }
       }
