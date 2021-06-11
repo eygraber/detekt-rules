@@ -21,5 +21,6 @@ tasks.withType<Detekt>().configureEach {
 
 dependencies {
   detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${detektVersion}")
-  detektPlugins("com.eygraber.detekt.rules:formatting:1.0.0")
+  detektPlugins("com.eygraber.detekt.rules:formatting:1.0.1")
+  detektPlugins("com.eygraber.detekt.rules:style:1.0.1")
 }

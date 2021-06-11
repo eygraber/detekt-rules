@@ -731,3 +731,8 @@ style:
     active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
     excludeImports: []
+
+style-eygraber:
+  NewlineForMultilineKeyword:
+    active: true
+    autoCorrect: true
