@@ -11,7 +11,6 @@ import io.gitlab.arturbosch.detekt.api.Severity
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
 import org.jetbrains.kotlin.psi.KtBlockExpression
-import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtIfExpression
 import org.jetbrains.kotlin.psi.KtTryExpression
 
@@ -25,13 +24,6 @@ class NewlineForMultilineKeyword(
     Debt.FIVE_MINS
   )
 
-  private var indentSize = -1
-
-  override fun visit(root: KtFile) {
-    indentSize = root.node.getUserData(KtLint.EDITOR_CONFIG_USER_DATA_KEY)?.indentSize ?: -1
-    super.visit(root)
-  }
-
   override fun visitIfExpression(expression: KtIfExpression) {
     val elseExpression = expression.`else` ?: return
     if(expression.then is KtBlockExpression && elseExpression is KtBlockExpression) {
@@ -39,6 +31,7 @@ class NewlineForMultilineKeyword(
       if(!elseKeyword.prevSibling.text.startsWith('\n')) {
         report(elseKeyword)
 
+        val indentSize = elseKeyword.node.getUserData(KtLint.EDITOR_CONFIG_USER_DATA_KEY)?.indentSize ?: 2
         if(indentSize != -1) {
           withAutoCorrect {
             elseKeyword.prevSibling.node.treeParent.replaceChild(
@@ -52,16 +45,21 @@ class NewlineForMultilineKeyword(
   }
 
   override fun visitTryExpression(expression: KtTryExpression) {
+    val autoCorrects = mutableListOf<() -> Unit>()
+
     expression.catchClauses.forEach { catch ->
       if(!catch.prevSibling.text.startsWith('\n')) {
         report(catch)
 
-        if(indentSize != -1) {
-          withAutoCorrect {
-            catch.prevSibling.node.treeParent.replaceChild(
-              catch.prevSibling.node,
-              PsiWhiteSpaceImpl("\n${" ".repeat(indentSize)}")
-            )
+        withAutoCorrect {
+          val indentSize = catch.node.getUserData(KtLint.EDITOR_CONFIG_USER_DATA_KEY)?.indentSize ?: 2
+          if(indentSize != -1) {
+            autoCorrects += {
+              catch.prevSibling.node.treeParent.replaceChild(
+                catch.prevSibling.node,
+                PsiWhiteSpaceImpl("\n${" ".repeat(indentSize)}")
+              )
+            }
           }
         }
       }
@@ -71,14 +69,23 @@ class NewlineForMultilineKeyword(
       if(!finallyBlock.prevSibling.text.startsWith('\n')) {
         report(finallyBlock)
 
-        if(indentSize != -1) {
-          withAutoCorrect {
-            finallyBlock.prevSibling.node.treeParent.replaceChild(
-              finallyBlock.prevSibling.node,
-              PsiWhiteSpaceImpl("\n${" ".repeat(indentSize)}")
-            )
+        withAutoCorrect {
+          val indentSize = finallyBlock.node.getUserData(KtLint.EDITOR_CONFIG_USER_DATA_KEY)?.indentSize ?: 2
+          if(indentSize != -1) {
+            autoCorrects += {
+              finallyBlock.prevSibling.node.treeParent.replaceChild(
+                finallyBlock.prevSibling.node,
+                PsiWhiteSpaceImpl("\n${" ".repeat(indentSize)}")
+              )
+            }
           }
         }
+      }
+    }
+
+    withAutoCorrect {
+      for(autoCorrect in autoCorrects) {
+        autoCorrect()
       }
     }
   }

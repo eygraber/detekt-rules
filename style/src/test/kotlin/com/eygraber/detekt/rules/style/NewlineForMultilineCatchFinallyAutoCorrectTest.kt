@@ -33,7 +33,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before finally should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {
@@ -96,7 +95,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before catch should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {
@@ -162,7 +160,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before catch with finally should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {
@@ -237,7 +234,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before finally with a catch should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {
@@ -290,7 +286,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before catch and finally should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {
@@ -363,7 +358,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before multiple catches should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {
@@ -442,7 +436,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before multiple catches and finally should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {
@@ -503,7 +496,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before finally with multiple catches should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {
@@ -584,7 +576,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before catch with catch before should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {
@@ -617,7 +608,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before catch with catch after should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {
@@ -694,7 +684,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before catch and finally with catch before should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {
@@ -755,7 +744,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before catch and finally with catch after should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {
@@ -816,7 +804,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before multiple catches with finally should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {
@@ -902,7 +889,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before catch with catch before and finally should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {
@@ -941,7 +927,6 @@ class NewlineForMultilineCatchFinallyAutoCorrectTest {
   @Test
   fun `no newline before catch with catch after and finally should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  try {

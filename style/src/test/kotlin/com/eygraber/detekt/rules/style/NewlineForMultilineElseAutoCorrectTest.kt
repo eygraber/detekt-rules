@@ -32,7 +32,6 @@ class NewlineForMultilineElseAutoCorrectTest {
   @Test
   fun `no newline before else should format with autocorrect`() {
     rule.assertFormat(
-      indentSize = 2,
       input = """
       |fun foo() {
       |  if(true) {

@@ -1,5 +1,6 @@
 plugins {
   `rules-project`
+  detekt
 }
 
 dependencies {
