@@ -1,8 +1,6 @@
 package com.eygraber.detekt.rules.style
 
-import com.eygraber.detekt.rules.common.test.assertFormat
 import io.gitlab.arturbosch.detekt.api.SourceLocation
-import io.gitlab.arturbosch.detekt.test.TestConfig
 import io.gitlab.arturbosch.detekt.test.assertThat
 import io.gitlab.arturbosch.detekt.test.lint
 import org.junit.Test
