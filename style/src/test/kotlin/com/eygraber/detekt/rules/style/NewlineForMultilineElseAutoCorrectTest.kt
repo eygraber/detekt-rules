@@ -159,27 +159,27 @@ class NewlineForMultilineElseAutoCorrectTest {
       |fun foo() {
       |if(true) {
       |   
-      |  } 
+      |  }
       |else if(false) {
       |  
       |  } else {
       |  
       |  }
-      |}  
+      |}
       """.trimMargin(),
 
       expected = """
       |fun foo() {
       |if(true) {
       |   
-      |  } 
+      |  }
       |else if(false) {
       |  
       |  }
       |else {
       |  
       |  }
-      |}  
+      |}
       """.trimMargin()
     )
   }

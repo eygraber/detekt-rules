@@ -3,14 +3,22 @@ name: Publish a release
 on:
   push:
     branches:
-      - master
+      - release
+
+env:
+  VERSION_FILE: gradle.properties
+  VERSION_EXTRACT_PATTERN: '(?<=VERSION_NAME=).+'
+  GH_USER_NAME: github.actor
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -Xms128m -XX:MaxPermSize=4096m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
 
 jobs:
   publish_archives:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - uses: gradle/wrapper-validation-action@v1
+
       - name: Cache gradle
         uses: actions/cache@v2.1.0
         with:
@@ -18,15 +26,45 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+
+      - name: Generate versions
+       uses: HardNorth/github-version.generate@v1.0.2
+       with:
+         version-source: file
+         version-file: ${{ env.VERSION_FILE }}
+         version-file-extraction-pattern: ${{ env.VERSION_EXTRACT_PATTERN }}
+
       - uses: actions/setup-java@v1
         with:
               java-version: 11
+
       - name: Publish the artifacts
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.ARTIFACT_SIGNING_PRIVATE_KEY }}
-        run: ./release
+        run: ./release -PVERSION_NAME=${{ env.RELEASE_VERSION }} && ./gradlew closeAndReleaseRepository -PVERSION_NAME=${{ env.RELEASE_VERSION }}
 
-env:
-  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -Xms128m -XX:MaxPermSize=4096m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
+      - name: Tag
+        id: tag
+        run: |
+          git tag =a ${{ env.RELEASE_VERSION }}
+          git push --tags
+
+      - name: Build changelog
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@v1
+        with:
+          toTag: ${{ env.RELEASE_VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        with:
+          body: ${{ steps.github_release.outputs.changelog }}
+          commit: release
+          name: Release ${{ env.RELEASE_VERSION }}
+          tag: ${{ env.RELEASE_VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
