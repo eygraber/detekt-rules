@@ -25,8 +25,15 @@ class NewlineForMultilineKeyword(
   )
 
   override fun visitIfExpression(expression: KtIfExpression) {
+    // println(expression.elseKeyword?.prevSibling?.text?.contains("\n") == true)
     val elseExpression = expression.`else` ?: return
-    if(expression.then is KtBlockExpression && elseExpression is KtBlockExpression) {
+
+    val shouldHandle = expression.then is KtBlockExpression && when(elseExpression) {
+      is KtIfExpression -> elseExpression.then is KtBlockExpression // handles else if
+      else -> elseExpression is KtBlockExpression
+    }
+
+    if(shouldHandle) {
       val elseKeyword = expression.elseKeyword ?: return
       if(!elseKeyword.prevSibling.text.startsWith('\n')) {
         report(elseKeyword)
