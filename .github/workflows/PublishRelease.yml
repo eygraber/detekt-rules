@@ -27,12 +27,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Setup git
-        run: |
-          git config user.name '${{ secrets.MAINTAINER_USER_NAME }}'
-          git config user.email '${{ secrets.MAINTAINER_EMAIL }}'
-          git config user.password ${{ secrets.GITHUB_TOKEN }}
-
       - name: Generate versions
         uses: HardNorth/github-version-generate@v1.1.1
         with:
@@ -51,11 +45,17 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.ARTIFACT_SIGNING_PRIVATE_KEY }}
         run: ./release -PVERSION_NAME=${{ env.RELEASE_VERSION }} && ./gradlew closeAndReleaseRepository -PVERSION_NAME=${{ env.RELEASE_VERSION }}
 
-      - name: Tag
-        id: tag
-        run: |
-          git tag -a ${{ env.RELEASE_VERSION }}
-          git push --tags
+      - name: Create tag
+        id: create_tag
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/${{ RELEASE_VERSION }}",
+              sha: context.sha
+            })
 
       - name: Build changelog
         id: build_changelog
