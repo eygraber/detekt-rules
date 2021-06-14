@@ -48,7 +48,7 @@ jobs:
       - name: Tag
         id: tag
         run: |
-          git tag =a ${{ env.RELEASE_VERSION }}
+          git tag -a ${{ env.RELEASE_VERSION }}
           git push --tags
 
       - name: Build changelog
