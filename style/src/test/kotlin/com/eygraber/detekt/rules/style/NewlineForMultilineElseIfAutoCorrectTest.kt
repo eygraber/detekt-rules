@@ -266,4 +266,64 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       """.trimMargin()
     )
   }
+
+  @Test
+  fun `single line if else if should not fail with autocorrect`() {
+    val findings = rule.lint(
+      """
+      |fun foo() {
+      |  if(true) continue else if(false) continue
+      |}
+      """.trimMargin()
+    )
+
+    assertThat(findings).isEmpty()
+  }
+
+  @Test
+  fun `single line if else if should not format with autocorrect`() {
+    rule.assertFormat(
+      input = """
+      |fun foo() {
+      |  if(true) continue else if(false) continue
+      |}
+      """.trimMargin(),
+
+      expected = """
+      |fun foo() {
+      |  if(true) continue else if(false) continue
+      |}
+      """.trimMargin()
+    )
+  }
+
+  @Test
+  fun `single line if else if else should not fail with autocorrect`() {
+    val findings = rule.lint(
+      """
+      |fun foo() {
+      |  if(true) continue else if(false) continue else continue
+      |}
+      """.trimMargin()
+    )
+
+    assertThat(findings).isEmpty()
+  }
+
+  @Test
+  fun `single line if else if else should not format with autocorrect`() {
+    rule.assertFormat(
+      input = """
+      |fun foo() {
+      |  if(true) continue else if(false) continue else continue
+      |}
+      """.trimMargin(),
+
+      expected = """
+      |fun foo() {
+      |  if(true) continue else if(false) continue else continue
+      |}
+      """.trimMargin()
+    )
+  }
 }

@@ -1,20 +1,23 @@
 package com.eygraber.detekt.rules.style
 
+import com.eygraber.detekt.rules.common.test.assertFormat
+import io.gitlab.arturbosch.detekt.api.SourceLocation
+import io.gitlab.arturbosch.detekt.test.TestConfig
 import io.gitlab.arturbosch.detekt.test.assertThat
 import io.gitlab.arturbosch.detekt.test.lint
 import org.junit.Test
 
-class NewlineForMultilineElseTest {
+class NewlineForMultilineElseIfTest {
   private val rule = NewlineForMultilineKeyword()
 
   @Test
-  fun `no newline before else should fail`() {
+  fun `no newline before else if should fail`() {
     val findings = rule.lint(
       """
       |fun foo() {
       |  if(true) {
       |   
-      |  } else {
+      |  } else if(false) {
       |  
       |  }
       |}
@@ -26,14 +29,14 @@ class NewlineForMultilineElseTest {
   }
 
   @Test
-  fun `newline before else should not fail`() {
+  fun `newline before else if should not fail`() {
     val findings = rule.lint(
       """
       |fun foo() {
       |  if(true) {
       |   
       |  }
-      |  else {
+      |  else if(false) {
       |  
       |  }
       |}
@@ -44,14 +47,34 @@ class NewlineForMultilineElseTest {
   }
 
   @Test
-  fun `no newline before else with else if should fail`() {
+  fun `no newline before else if with else should fail`() {
     val findings = rule.lint(
       """
       |fun foo() {
       |  if(true) {
       |  
+      |  } else if(false) {
+      |   
       |  }
-      |  else if(false) {
+      |  else {
+      |  
+      |  }
+      |}
+      """.trimMargin()
+    )
+
+    assertThat(findings).hasSize(1)
+    assertThat(findings).hasSourceLocation(line = 4, column = 5)
+  }
+
+  @Test
+  fun `no newline before else if and else should fail`() {
+    val findings = rule.lint(
+      """
+      |fun foo() {
+      |  if(true) {
+      |  
+      |  } else if(false) {
       |   
       |  } else {
       |  
@@ -60,24 +83,16 @@ class NewlineForMultilineElseTest {
       """.trimMargin()
     )
 
-    assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 7, column = 5)
+    assertThat(findings).hasSize(2)
+    assertThat(findings).hasSourceLocations(SourceLocation(line = 4, column = 5), SourceLocation(line = 6, column = 5))
   }
 
   @Test
-  fun `newline before else with else if should not fail`() {
+  fun `single line if else if should not fail`() {
     val findings = rule.lint(
       """
       |fun foo() {
-      |  if(true) {
-      |   
-      |  }
-      |  else if(false) {
-      |    
-      |  }
-      |  else {
-      |  
-      |  }
+      |  if(true) continue else if(false) continue
       |}
       """.trimMargin()
     )
@@ -86,11 +101,11 @@ class NewlineForMultilineElseTest {
   }
 
   @Test
-  fun `single line if else should not fail`() {
+  fun `single line if else if else should not fail`() {
     val findings = rule.lint(
       """
       |fun foo() {
-      |  if(true) continue else continue
+      |  if(true) continue else if(false) continue else continue
       |}
       """.trimMargin()
     )
