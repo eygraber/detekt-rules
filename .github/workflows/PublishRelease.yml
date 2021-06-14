@@ -12,7 +12,7 @@ env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -Xms128m -XX:MaxPermSize=4096m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
 
 jobs:
-  publish_archives:
+  publish_release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -28,7 +28,7 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Generate versions
-        uses: HardNorth/github-version.generate@v1.0.2
+        uses: HardNorth/github-version-generate@v1.1.1
         with:
           version-source: file
           version-file: ${{ env.VERSION_FILE }}

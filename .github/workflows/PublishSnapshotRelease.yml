@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  publish_archives:
+  publish_snapshot:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
