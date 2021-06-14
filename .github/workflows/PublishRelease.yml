@@ -9,7 +9,6 @@ env:
   VERSION_FILE: gradle.properties
   VERSION_EXTRACT_PATTERN: '(?<=VERSION_NAME=).+'
   GH_USER_NAME: github.actor
-  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -Xms128m -XX:MaxPermSize=4096m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
 
 jobs:
   publish_release:
@@ -43,6 +42,7 @@ jobs:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.ARTIFACT_SIGNING_PRIVATE_KEY }}
+          GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -Xms128m -XX:MaxPermSize=4096m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
         run: ./release -PVERSION_NAME=${{ env.RELEASE_VERSION }} && ./gradlew closeAndReleaseRepository -PVERSION_NAME=${{ env.RELEASE_VERSION }}
 
       - name: Create tag
@@ -75,3 +75,17 @@ jobs:
           name: Release ${{ env.RELEASE_VERSION }}
           tag: ${{ env.RELEASE_VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prepare next dev version
+        id: prepare_next_dev
+        run: sed -i -e 's/${{ env.CURRENT_VERSION }}/${{ env.NEXT_VERSION }}/g' gradle.properties
+
+      - name: Commit next dev version
+        id: commit_next_dev
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: 'gradle.properties'
+          branch: master
+          default_author: github_actions
+          message: "Prepare next dev version"
+          pull_strategy: "--rebase"
