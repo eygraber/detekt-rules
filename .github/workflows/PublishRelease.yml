@@ -27,6 +27,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Setup git
+        run: |
+          git config user.name '${{ secrets.MAINTAINER_USER_NAME }}'
+          git config user.email '${{ secrets.MAINTAINER_EMAIL }}'
+          git config user.password ${{ secrets.GITHUB_TOKEN }}
+
       - name: Generate versions
         uses: HardNorth/github-version-generate@v1.1.1
         with:
