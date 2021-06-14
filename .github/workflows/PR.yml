@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - uses: gradle/wrapper-validation-action@v1
+
       - name: Cache gradle
         uses: actions/cache@v2.1.0
         with:
@@ -16,9 +18,11 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+
       - uses: actions/setup-java@v1
         with:
               java-version: 11
+
       - name: Run tests
         run: ./gradlew test
 
@@ -26,7 +30,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - uses: gradle/wrapper-validation-action@v1
+
       - name: Cache gradle
         uses: actions/cache@v2.1.0
         with:
@@ -34,9 +40,11 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+
       - uses: actions/setup-java@v1
         with:
           java-version: 11
+
       - name: Run detekt
         run: ./gradlew detekt
 
