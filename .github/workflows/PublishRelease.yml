@@ -27,12 +27,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-     - name: Generate versions
-       uses: HardNorth/github-version.generate@v1.0.2
-       with:
-         version-source: file
-         version-file: ${{ env.VERSION_FILE }}
-         version-file-extraction-pattern: ${{ env.VERSION_EXTRACT_PATTERN }}
+      - name: Generate versions
+        uses: HardNorth/github-version.generate@v1.0.2
+        with:
+          version-source: file
+          version-file: ${{ env.VERSION_FILE }}
+          version-file-extraction-pattern: ${{ env.VERSION_EXTRACT_PATTERN }}
 
       - uses: actions/setup-java@v1
         with:
