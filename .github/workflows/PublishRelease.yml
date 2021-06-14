@@ -69,7 +69,7 @@ jobs:
         id: create_release
         uses: ncipollo/release-action@v1
         with:
-          body: ${{ steps.github_release.outputs.changelog }}
+          body: "${{ steps.github_release.outputs.changelog }}"
           commit: release
           name: Release ${{ env.RELEASE_VERSION }}
           tag: ${{ env.RELEASE_VERSION }}
