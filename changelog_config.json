@@ -15,6 +15,10 @@
     {
       "title": "## 🧪 Tests",
       "labels": ["test"]
+    },
+    {
+      "title": "## \uD83D\uDCD6 Documentation",
+      "labels": ["documentation"]
     }
   ],
   "ignore_labels": [
