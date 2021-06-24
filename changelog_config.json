@@ -25,7 +25,7 @@
     "duplicate", "good first issue", "help wanted", "invalid", "question", "wontfix"
   ],
   "sort": "ASC",
-  "template": "${{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n${{UNCATEGORIZED}}\n</details>",
+  "template": "${{CHANGELOG}}",
   "pr_template": "- ${{TITLE}} (#${{NUMBER}})",
   "empty_template": "- no changes",
   "label_extractor": [
