@@ -56,7 +56,8 @@ class NoWhitespaceAfterWhenAutoCorrectTest {
       |  when (bar) {
       |    else -> println("baz")
       |  }
-      |}""".trimMargin(),
+      |}
+      """.trimMargin(),
 
       expected = """
       |fun foo() {
@@ -64,7 +65,8 @@ class NoWhitespaceAfterWhenAutoCorrectTest {
       |  when(bar) {
       |    else -> println("baz")
       |  }
-      |}""".trimMargin()
+      |}
+      """.trimMargin()
     )
   }
 
@@ -77,7 +79,8 @@ class NoWhitespaceAfterWhenAutoCorrectTest {
       |  when   (bar) {
       |    else -> println("baz")
       |  }
-      |}""".trimMargin(),
+      |}
+      """.trimMargin(),
 
       expected = """
       |fun foo() {
@@ -85,7 +88,8 @@ class NoWhitespaceAfterWhenAutoCorrectTest {
       |  when(bar) {
       |    else -> println("baz")
       |  }
-      |}""".trimMargin()
+      |}
+      """.trimMargin()
     )
   }
 
