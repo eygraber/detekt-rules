@@ -1,10 +1,10 @@
 package com.eygraber.detekt.rules.common.test
 
 import io.github.detekt.test.utils.compileContentForTest
-import io.gitlab.arturbosch.detekt.api.internal.BaseRule
+import io.gitlab.arturbosch.detekt.api.Rule
 import org.intellij.lang.annotations.Language
 
-fun BaseRule.assertFormat(
+fun Rule.assertFormat(
   @Language("kotlin") input: String,
   @Language("kotlin") expected: String,
 ) {
@@ -17,6 +17,7 @@ fun BaseRule.assertFormat(
       |${ktFile.text}
       |
       |$expected
-      |""".trimMargin()
+      |
+    """.trimMargin()
   }
 }
