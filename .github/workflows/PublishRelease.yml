@@ -18,7 +18,7 @@ jobs:
         with:
           token: ${{ secrets.PUSH_PAT }}
 
-      - uses: gradle/wrapper-validation-action@v2.1.0
+      - uses: gradle/wrapper-validation-action@v2.1.1
 
       - name: Cache gradle
         uses: actions/cache@v4
