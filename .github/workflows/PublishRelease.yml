@@ -1,13 +1,11 @@
 name: Publish a release
 
 on:
-  push:
-    branches:
-      - release
+  workflow_dispatch
 
 env:
   VERSION_FILE: gradle.properties
-  VERSION_EXTRACT_PATTERN: '(?<=VERSION_NAME=).+'
+  VERSION_EXTRACT_PATTERN: '(?<=version=).+'
   GH_USER_NAME: github.actor
 
 jobs:
@@ -18,6 +16,16 @@ jobs:
         with:
           token: ${{ secrets.PUSH_PAT }}
 
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version-file: .ci-java-version
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: wrapper
+
       - name: Generate versions
         uses: HardNorth/github-version-generate@v1
         with:
@@ -25,41 +33,50 @@ jobs:
           version-file: ${{ env.VERSION_FILE }}
           version-file-extraction-pattern: ${{ env.VERSION_EXTRACT_PATTERN }}
 
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version-file: .ci-java-version
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: wrapper
-          gradle-home-cache-cleanup: true
-          validate-wrappers: true
-
       - name: Publish the artifacts
         env:
-          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
-          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.ARTIFACT_SIGNING_PRIVATE_KEY }}
-          GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
-        run: ./release -PVERSION_NAME=${{ env.RELEASE_VERSION }} && ./gradlew closeAndReleaseRepository -PVERSION_NAME=${{ env.RELEASE_VERSION }}
+          GRADLE_OPTS: -Dorg.gradle.daemon=false -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx16g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
+        run: ./gradlew publish -Pversion=${{ env.RELEASE_VERSION }}
+
+      - name: Create, checkout, and push release branch
+        run: |
+          git config user.name eygraber
+          git config user.email 1100381+eygraber@users.noreply.github.com
+          git checkout -b releases/${{ env.RELEASE_VERSION }}
+          git push origin releases/${{ env.RELEASE_VERSION }}
+
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GIT_SIGNING_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GIT_SIGNING_PRIVATE_KEY_PASSWORD }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+          git_tag_gpgsign: true
+
+      - name: Store SHA of HEAD commit on ENV
+        run: echo "GIT_HEAD=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Create tag
         id: create_tag
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.PUSH_PAT }}
           script: |
+            const {GIT_HEAD} = process.env
             github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: "refs/tags/${{ env.RELEASE_VERSION }}",
-              sha: context.sha
+              sha: `${GIT_HEAD}`
             })
 
       - name: Build changelog
         id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@v4
+        uses: mikepenz/release-changelog-builder-action@v5
         with:
           configuration: "changelog_config.json"
           toTag: ${{ env.RELEASE_VERSION }}
@@ -71,14 +88,13 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           body: ${{ steps.build_changelog.outputs.changelog }}
-          commit: release
           name: Release ${{ env.RELEASE_VERSION }}
           tag: ${{ env.RELEASE_VERSION }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PUSH_PAT }}
 
       - uses: actions/checkout@v4
         with:
-          ref: 'master'
+          ref: ${{ github.event.head_ref }}
           token: ${{ secrets.PUSH_PAT }}
 
       - name: Prepare next dev version
@@ -89,6 +105,6 @@ jobs:
         id: commit_next_dev
         uses: EndBug/add-and-commit@v9
         with:
-          add: 'gradle.properties'
+          add: "['gradle.properties']"
           default_author: github_actions
-          message: "Prepare next dev version"
+          message: "Prepare next dev version (${{ env.NEXT_VERSION }})"

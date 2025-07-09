@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-./gradlew :formatting:clean :formatting:build :formatting:publish $@ --no-daemon --no-parallel && \
-./gradlew :style:clean :style:build :style:publish $@ --no-daemon --no-parallel

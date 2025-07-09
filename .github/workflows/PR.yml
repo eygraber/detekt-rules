@@ -15,14 +15,18 @@ jobs:
           java-version-file: .ci-java-version
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
-          gradle-home-cache-cleanup: true
-          validate-wrappers: true
 
       - name: Run tests
         run: ./gradlew test
+
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v4
+        if: always()
+        with:
+          report_paths: '**/build/test-results/test/TEST-*.xml'
 
   run_detekt:
     runs-on: ubuntu-latest
@@ -35,14 +39,20 @@ jobs:
           java-version-file: .ci-java-version
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
-          gradle-home-cache-cleanup: true
-          validate-wrappers: true
 
       - name: Run detekt
-        run: ./gradlew detekt
+        run: ./gradlew detektMain
+
+  run_ktlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run ktlint
+        run: ./format --no-format
 
 env:
-  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx16g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"

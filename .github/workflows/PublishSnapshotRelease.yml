@@ -17,18 +17,18 @@ jobs:
           java-version-file: .ci-java-version
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
-          gradle-home-cache-cleanup: true
-          validate-wrappers: true
+          dependency-graph: generate-and-submit
 
       - name: Publish the artifacts
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.ARTIFACT_SIGNING_PRIVATE_KEY }}
-        run: ./release
+        run: ./gradlew publish
 
 env:
-  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx16g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
+  DEPENDENCY_GRAPH_INCLUDE_CONFIGURATIONS: runtimeClasspath

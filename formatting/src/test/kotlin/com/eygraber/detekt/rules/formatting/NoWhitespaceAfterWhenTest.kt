@@ -22,7 +22,7 @@ class NoWhitespaceAfterWhenTest {
     val findings = rule.lint(code)
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 3, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 3, column = 3)
   }
 
   @Test
@@ -40,7 +40,7 @@ class NoWhitespaceAfterWhenTest {
     val findings = rule.lint(code)
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 3, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 3, column = 3)
   }
 
   @Test
@@ -53,7 +53,7 @@ class NoWhitespaceAfterWhenTest {
       |    else -> println("baz")
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -68,11 +68,11 @@ class NoWhitespaceAfterWhenTest {
       |    else -> println(bar)
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -84,11 +84,11 @@ class NoWhitespaceAfterWhenTest {
       |    else -> println(bar)
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -100,7 +100,7 @@ class NoWhitespaceAfterWhenTest {
       |    else -> println(bar)
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -115,11 +115,11 @@ class NoWhitespaceAfterWhenTest {
       |    else -> println("bar")
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -131,11 +131,11 @@ class NoWhitespaceAfterWhenTest {
       |    else -> println("bar")
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -147,7 +147,7 @@ class NoWhitespaceAfterWhenTest {
       |    else -> println("bar")
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -162,11 +162,11 @@ class NoWhitespaceAfterWhenTest {
       |    else -> println("bar")
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -178,11 +178,11 @@ class NoWhitespaceAfterWhenTest {
       |    else -> println("bar")
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -194,7 +194,7 @@ class NoWhitespaceAfterWhenTest {
       |    else -> println("bar")
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -209,7 +209,7 @@ class NoWhitespaceAfterWhenTest {
       |    "".isEmpty() -> println("baz")
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()

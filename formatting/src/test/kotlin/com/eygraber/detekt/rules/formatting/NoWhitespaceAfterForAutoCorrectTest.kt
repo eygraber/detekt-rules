@@ -8,7 +8,7 @@ import org.junit.Test
 
 class NoWhitespaceAfterForAutoCorrectTest {
   private val rule = NoWhitespaceAfterKeyword(
-    TestConfig("autoCorrect" to true)
+    TestConfig("autoCorrect" to true),
   )
 
   @Test
@@ -19,11 +19,11 @@ class NoWhitespaceAfterForAutoCorrectTest {
       |  val bars = arrayOf("")
       |  for (bar in bars) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 3, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 3, column = 3)
   }
 
   @Test
@@ -34,11 +34,11 @@ class NoWhitespaceAfterForAutoCorrectTest {
       |  val bars = arrayOf("")
       |  for   (bar in bars) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 3, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 3, column = 3)
   }
 
   @Test
@@ -56,7 +56,7 @@ class NoWhitespaceAfterForAutoCorrectTest {
       |  val bars = arrayOf("")
       |  for(bar in bars) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -75,7 +75,7 @@ class NoWhitespaceAfterForAutoCorrectTest {
       |  val bars = arrayOf("")
       |  for(bar in bars) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -87,7 +87,7 @@ class NoWhitespaceAfterForAutoCorrectTest {
       |  val bars = arrayOf("")
       |  for(bar in bars) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()

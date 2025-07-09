@@ -8,7 +8,7 @@ import org.junit.Test
 
 class NoWhitespaceAfterWhileAutoCorrectTest {
   private val rule = NoWhitespaceAfterKeyword(
-    TestConfig("autoCorrect" to true)
+    TestConfig("autoCorrect" to true),
   )
 
   @Test
@@ -18,11 +18,11 @@ class NoWhitespaceAfterWhileAutoCorrectTest {
       |fun foo() {
       |  while (true) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -32,11 +32,11 @@ class NoWhitespaceAfterWhileAutoCorrectTest {
       |fun foo() {
       |  while   (true) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -52,7 +52,7 @@ class NoWhitespaceAfterWhileAutoCorrectTest {
       |fun foo() {
       |  while(true) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -69,7 +69,7 @@ class NoWhitespaceAfterWhileAutoCorrectTest {
       |fun foo() {
       |  while(true) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -80,7 +80,7 @@ class NoWhitespaceAfterWhileAutoCorrectTest {
       |fun foo() {
       |  while(true) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()

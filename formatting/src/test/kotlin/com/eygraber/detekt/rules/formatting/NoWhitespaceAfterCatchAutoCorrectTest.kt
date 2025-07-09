@@ -9,7 +9,7 @@ import org.junit.Test
 
 class NoWhitespaceAfterCatchAutoCorrectTest {
   private val rule = NoWhitespaceAfterKeyword(
-    TestConfig("autoCorrect" to true)
+    TestConfig("autoCorrect" to true),
   )
 
   @Test
@@ -19,11 +19,11 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch (e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -33,11 +33,11 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch   (e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -53,7 +53,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -70,7 +70,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -82,11 +82,11 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  try {}
       |  catch (e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -97,11 +97,11 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  try {}
       |  catch   (e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -119,7 +119,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  try {}
       |  catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -138,7 +138,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  try {}
       |  catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -151,11 +151,11 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch (ise: IllegalStateException) {} catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 3)
   }
 
   @Test
@@ -167,11 +167,11 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch   (ise: IllegalStateException) {} catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 3)
   }
 
   @Test
@@ -191,7 +191,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch(ise: IllegalStateException) {} catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -212,7 +212,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch(ise: IllegalStateException) {} catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -227,11 +227,11 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  catch (ise: IllegalStateException) {}
       |  catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 3)
   }
 
   @Test
@@ -245,11 +245,11 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  catch   (ise: IllegalStateException) {}
       |  catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 3)
   }
 
   @Test
@@ -273,7 +273,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  catch(ise: IllegalStateException) {}
       |  catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -298,7 +298,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  catch(ise: IllegalStateException) {}
       |  catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -311,11 +311,11 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch(ise: IllegalStateException) {} catch (e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 3)
   }
 
   @Test
@@ -327,11 +327,11 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch(ise: IllegalStateException) {} catch   (e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 3)
   }
 
   @Test
@@ -351,7 +351,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch(ise: IllegalStateException) {} catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -372,7 +372,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch(ise: IllegalStateException) {} catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -387,11 +387,11 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  catch(ise: IllegalStateException) {}
       |  catch (e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 3)
   }
 
   @Test
@@ -405,11 +405,11 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  catch(ise: IllegalStateException) {}
       |  catch   (e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 3)
   }
 
   @Test
@@ -433,7 +433,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  catch(ise: IllegalStateException) {}
       |  catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -458,7 +458,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  catch(ise: IllegalStateException) {}
       |  catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -471,11 +471,14 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch (ise: IllegalStateException) {} catch (e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(2)
-    assertThat(findings).hasSourceLocations(SourceLocation(line = 4, column = 3), SourceLocation(line = 4, column = 3))
+    assertThat(findings).hasStartSourceLocations(
+      SourceLocation(line = 4, column = 3),
+      SourceLocation(line = 4, column = 3),
+    )
   }
 
   @Test
@@ -487,11 +490,14 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch   (ise: IllegalStateException) {} catch   (e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(2)
-    assertThat(findings).hasSourceLocations(SourceLocation(line = 4, column = 3), SourceLocation(line = 4, column = 3))
+    assertThat(findings).hasStartSourceLocations(
+      SourceLocation(line = 4, column = 3),
+      SourceLocation(line = 4, column = 3),
+    )
   }
 
   @Test
@@ -511,7 +517,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch(ise: IllegalStateException) {} catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -532,7 +538,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch(ise: IllegalStateException) {} catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -547,11 +553,14 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  catch (ise: IllegalStateException) {}
       |  catch (e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(2)
-    assertThat(findings).hasSourceLocations(SourceLocation(line = 4, column = 3), SourceLocation(line = 4, column = 3))
+    assertThat(findings).hasStartSourceLocations(
+      SourceLocation(line = 4, column = 3),
+      SourceLocation(line = 4, column = 3),
+    )
   }
 
   @Test
@@ -565,11 +574,14 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  catch   (ise: IllegalStateException) {}
       |  catch   (e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(2)
-    assertThat(findings).hasSourceLocations(SourceLocation(line = 4, column = 3), SourceLocation(line = 4, column = 3))
+    assertThat(findings).hasStartSourceLocations(
+      SourceLocation(line = 4, column = 3),
+      SourceLocation(line = 4, column = 3),
+    )
   }
 
   @Test
@@ -593,7 +605,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  catch(ise: IllegalStateException) {}
       |  catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -618,7 +630,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  catch(ise: IllegalStateException) {}
       |  catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -629,7 +641,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -643,7 +655,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  try {}
       |  catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -658,7 +670,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |fun foo() {
       |  try {} catch(ise: IllegalStateException) {} catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -675,7 +687,7 @@ class NoWhitespaceAfterCatchAutoCorrectTest {
       |  catch(ise: IllegalStateException) {}
       |  catch(e: Exception) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()

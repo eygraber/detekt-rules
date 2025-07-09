@@ -8,7 +8,7 @@ import org.junit.Test
 
 class NewlineForMultilineElseAutoCorrectTest {
   private val rule = NewlineForMultilineKeyword(
-    TestConfig("autoCorrect" to true)
+    TestConfig("autoCorrect" to true),
   )
 
   @Test
@@ -22,11 +22,11 @@ class NewlineForMultilineElseAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 5)
   }
 
   @Test
@@ -51,7 +51,7 @@ class NewlineForMultilineElseAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -77,7 +77,7 @@ class NewlineForMultilineElseAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -93,7 +93,7 @@ class NewlineForMultilineElseAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -113,11 +113,11 @@ class NewlineForMultilineElseAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 7, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 7, column = 5)
   }
 
   @Test
@@ -148,7 +148,7 @@ class NewlineForMultilineElseAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -180,7 +180,7 @@ class NewlineForMultilineElseAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -199,7 +199,7 @@ class NewlineForMultilineElseAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -212,7 +212,7 @@ class NewlineForMultilineElseAutoCorrectTest {
       |fun foo() {
       |  if(true) continue else continue
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -231,7 +231,7 @@ class NewlineForMultilineElseAutoCorrectTest {
       |fun foo() {
       |  if(true) continue else continue
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 }

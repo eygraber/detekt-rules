@@ -1,6 +1,6 @@
 package com.eygraber.detekt.rules.style
 
-import com.pinterest.ktlint.core.ast.lineIndent
+import com.pinterest.ktlint.rule.engine.core.api.indent
 import io.gitlab.arturbosch.detekt.api.CodeSmell
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.Debt
@@ -14,14 +14,14 @@ import org.jetbrains.kotlin.psi.KtBlockExpression
 import org.jetbrains.kotlin.psi.KtIfExpression
 import org.jetbrains.kotlin.psi.KtTryExpression
 
-class NewlineForMultilineKeyword(
-  ruleSetConfig: Config = Config.empty
+public class NewlineForMultilineKeyword(
+  ruleSetConfig: Config = Config.empty,
 ) : Rule(ruleSetConfig) {
-  override val issue = Issue(
+  override val issue: Issue = Issue(
     javaClass.simpleName,
     Severity.Style,
     "Multiline keyword was found that was not on a new line.",
-    Debt.FIVE_MINS
+    Debt.FIVE_MINS,
   )
 
   override fun visitIfExpression(expression: KtIfExpression) {
@@ -41,7 +41,7 @@ class NewlineForMultilineKeyword(
         withAutoCorrect {
           elseKeyword.prevSibling.node.treeParent.replaceChild(
             elseKeyword.prevSibling.node,
-            PsiWhiteSpaceImpl("\n${expression.node.lineIndent()}")
+            PsiWhiteSpaceImpl("\n${expression.node.indent(includeNewline = false)}"),
           )
         }
       }
@@ -61,7 +61,7 @@ class NewlineForMultilineKeyword(
           autoCorrects += {
             catch.prevSibling.node.treeParent.replaceChild(
               catch.prevSibling.node,
-              PsiWhiteSpaceImpl("\n${expression.node.lineIndent()}")
+              PsiWhiteSpaceImpl("\n${expression.node.indent(includeNewline = false)}"),
             )
           }
         }
@@ -76,7 +76,7 @@ class NewlineForMultilineKeyword(
           autoCorrects += {
             finallyBlock.prevSibling.node.treeParent.replaceChild(
               finallyBlock.prevSibling.node,
-              PsiWhiteSpaceImpl("\n${expression.node.lineIndent()}")
+              PsiWhiteSpaceImpl("\n${expression.node.indent(includeNewline = false)}"),
             )
           }
         }
@@ -95,8 +95,8 @@ class NewlineForMultilineKeyword(
       CodeSmell(
         issue,
         Entity.from(element),
-        issue.description
-      )
+        issue.description,
+      ),
     )
   }
 }
