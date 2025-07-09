@@ -26,10 +26,7 @@ detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", v
 detektEygraber-style = { module = "com.eygraber.detekt.rules:style", version.ref = "detektEygraber" }
 detektTest = { module = "io.gitlab.arturbosch.detekt:detekt-test", version.ref = "detekt" }
 
-# not actually used; just here so renovate picks it up
-ktlint = { module = "com.pinterest.ktlint:ktlint-core", version.ref = "ktlint" }
-
-ktlintCore = "com.pinterest.ktlint:ktlint-rule-engine-core:1.6.0"
+ktlintCore = { module = "com.pinterest.ktlint:ktlint-rule-engine-core", version.ref = "ktlint" }
 
 test-assertj = "org.assertj:assertj-core:3.27.3"
 test-junit = "junit:junit:4.13.2"
