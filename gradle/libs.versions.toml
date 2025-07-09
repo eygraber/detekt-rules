@@ -29,7 +29,7 @@ detektTest = { module = "io.gitlab.arturbosch.detekt:detekt-test", version.ref =
 # not actually used; just here so renovate picks it up
 ktlint = { module = "com.pinterest.ktlint:ktlint-core", version.ref = "ktlint" }
 
-ktlintCore = "com.pinterest.ktlint:ktlint-rule-engine-core:0.50.0"
+ktlintCore = "com.pinterest.ktlint:ktlint-rule-engine-core:1.6.0"
 
 test-assertj = "org.assertj:assertj-core:3.27.3"
 test-junit = "junit:junit:4.13.2"
