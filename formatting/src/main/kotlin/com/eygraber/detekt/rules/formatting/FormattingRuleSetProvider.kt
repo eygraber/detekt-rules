@@ -4,11 +4,11 @@ import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
 
-class FormattingRuleSetProvider : RuleSetProvider {
-  override val ruleSetId = "formatting-eygraber"
+public class FormattingRuleSetProvider : RuleSetProvider {
+  override val ruleSetId: String = "formatting-eygraber"
 
-  override fun instance(config: Config) = RuleSet(
+  override fun instance(config: Config): RuleSet = RuleSet(
     ruleSetId,
-    listOf(NoWhitespaceAfterKeyword(config))
+    listOf(NoWhitespaceAfterKeyword(config)),
   )
 }

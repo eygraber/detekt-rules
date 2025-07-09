@@ -9,7 +9,7 @@ import org.junit.Test
 
 class NewlineForMultilineElseIfAutoCorrectTest {
   private val rule = NewlineForMultilineKeyword(
-    TestConfig("autoCorrect" to true)
+    TestConfig("autoCorrect" to true),
   )
 
   @Test
@@ -23,11 +23,11 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 5)
   }
 
   @Test
@@ -52,7 +52,7 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -78,7 +78,7 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -94,7 +94,7 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -114,11 +114,11 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 5)
   }
 
   @Test
@@ -149,7 +149,7 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -181,7 +181,7 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       |  
       |  }
       |}  
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -198,11 +198,14 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(2)
-    assertThat(findings).hasSourceLocations(SourceLocation(line = 4, column = 5), SourceLocation(line = 6, column = 7))
+    assertThat(findings).hasStartSourceLocations(
+      SourceLocation(line = 4, column = 5),
+      SourceLocation(line = 6, column = 7),
+    )
   }
 
   @Test
@@ -232,7 +235,7 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -263,7 +266,7 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       |  
       |  }
       |}  
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -274,7 +277,7 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       |fun foo() {
       |  if(true) continue else if(false) continue
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -293,7 +296,7 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       |fun foo() {
       |  if(true) continue else if(false) continue
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -304,7 +307,7 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       |fun foo() {
       |  if(true) continue else if(false) continue else continue
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -323,7 +326,7 @@ class NewlineForMultilineElseIfAutoCorrectTest {
       |fun foo() {
       |  if(true) continue else if(false) continue else continue
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 }

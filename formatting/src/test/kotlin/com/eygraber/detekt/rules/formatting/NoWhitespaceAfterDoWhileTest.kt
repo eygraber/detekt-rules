@@ -14,11 +14,11 @@ class NoWhitespaceAfterDoWhileTest {
       |fun foo() {
       |  do {} while (true) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -28,11 +28,11 @@ class NoWhitespaceAfterDoWhileTest {
       |fun foo() {
       |  do {} while   (true) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -42,7 +42,7 @@ class NoWhitespaceAfterDoWhileTest {
       |fun foo() {
       |  do {} while(true) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()

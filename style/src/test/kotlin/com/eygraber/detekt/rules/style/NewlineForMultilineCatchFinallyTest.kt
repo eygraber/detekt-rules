@@ -19,11 +19,11 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 5)
   }
 
   @Test
@@ -38,7 +38,7 @@ class NewlineForMultilineCatchFinallyTest {
       | 
       |  }  
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -55,11 +55,11 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 5)
   }
 
   @Test
@@ -74,7 +74,7 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -94,11 +94,11 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 5)
   }
 
   @Test
@@ -116,7 +116,7 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }  
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -136,11 +136,11 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 7, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 7, column = 5)
   }
 
   @Test
@@ -156,11 +156,14 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(2)
-    assertThat(findings).hasSourceLocations(SourceLocation(line = 4, column = 5), SourceLocation(line = 6, column = 5))
+    assertThat(findings).hasStartSourceLocations(
+      SourceLocation(line = 4, column = 5),
+      SourceLocation(line = 6, column = 5),
+    )
   }
 
   @Test
@@ -178,7 +181,7 @@ class NewlineForMultilineCatchFinallyTest {
       | 
       |  }  
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -197,11 +200,14 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(2)
-    assertThat(findings).hasSourceLocations(SourceLocation(line = 4, column = 5), SourceLocation(line = 6, column = 5))
+    assertThat(findings).hasStartSourceLocations(
+      SourceLocation(line = 4, column = 5),
+      SourceLocation(line = 6, column = 5),
+    )
   }
 
   @Test
@@ -219,7 +225,7 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -240,14 +246,14 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(3)
-    assertThat(findings).hasSourceLocations(
+    assertThat(findings).hasStartSourceLocations(
       SourceLocation(line = 4, column = 5),
       SourceLocation(line = 6, column = 5),
-      SourceLocation(line = 8, column = 5)
+      SourceLocation(line = 8, column = 5),
     )
   }
 
@@ -268,11 +274,11 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 10, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 10, column = 5)
   }
 
   @Test
@@ -289,11 +295,11 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 7, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 7, column = 5)
   }
 
   @Test
@@ -310,11 +316,11 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 5)
   }
 
   @Test
@@ -332,7 +338,7 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -354,11 +360,14 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(2)
-    assertThat(findings).hasSourceLocations(SourceLocation(line = 7, column = 5), SourceLocation(line = 9, column = 5))
+    assertThat(findings).hasStartSourceLocations(
+      SourceLocation(line = 7, column = 5),
+      SourceLocation(line = 9, column = 5),
+    )
   }
 
   @Test
@@ -377,11 +386,14 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(2)
-    assertThat(findings).hasSourceLocations(SourceLocation(line = 4, column = 5), SourceLocation(line = 9, column = 5))
+    assertThat(findings).hasStartSourceLocations(
+      SourceLocation(line = 4, column = 5),
+      SourceLocation(line = 9, column = 5),
+    )
   }
 
   @Test
@@ -400,11 +412,14 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(2)
-    assertThat(findings).hasSourceLocations(SourceLocation(line = 4, column = 5), SourceLocation(line = 6, column = 5))
+    assertThat(findings).hasStartSourceLocations(
+      SourceLocation(line = 4, column = 5),
+      SourceLocation(line = 6, column = 5),
+    )
   }
 
   @Test
@@ -424,11 +439,11 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 7, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 7, column = 5)
   }
 
   @Test
@@ -448,11 +463,11 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 5)
   }
 
   @Test
@@ -473,7 +488,7 @@ class NewlineForMultilineCatchFinallyTest {
       |  
       |  }  
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()

@@ -1,0 +1,35 @@
+[versions]
+detekt = "1.23.8"
+detektEygraber = "1.0.11"
+
+dokka = "2.0.0"
+
+conventions = "0.0.86"
+
+kotlin = "2.2.0"
+
+ktlint = "1.6.0"
+
+publish = "0.33.0"
+
+[plugins]
+conventions = { id = "com.eygraber.conventions", version.ref = "conventions" }
+
+[libraries]
+buildscript-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+buildscript-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
+buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
+
+detektApi = { module = "io.gitlab.arturbosch.detekt:detekt-api", version.ref = "detekt" }
+detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
+detektEygraber-style = { module = "com.eygraber.detekt.rules:style", version.ref = "detektEygraber" }
+detektTest = { module = "io.gitlab.arturbosch.detekt:detekt-test", version.ref = "detekt" }
+
+# not actually used; just here so renovate picks it up
+ktlint = { module = "com.pinterest.ktlint:ktlint-core", version.ref = "ktlint" }
+
+ktlintCore = "com.pinterest.ktlint:ktlint-rule-engine-core:0.49.1"
+
+test-assertj = "org.assertj:assertj-core:3.27.3"
+test-junit = "junit:junit:4.13.2"

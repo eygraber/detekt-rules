@@ -8,7 +8,7 @@ import org.junit.Test
 
 class NoWhitespaceAfterIfAutoCorrectTest {
   private val rule = NoWhitespaceAfterKeyword(
-    TestConfig("autoCorrect" to true)
+    TestConfig("autoCorrect" to true),
   )
 
   @Test
@@ -18,11 +18,11 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if (true) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -32,11 +32,11 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if   (true) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -52,7 +52,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if(true) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -69,7 +69,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if(true) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -80,7 +80,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if(true) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -93,11 +93,11 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if (true) {} else {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -107,11 +107,11 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if   (true) {} else {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -127,7 +127,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if(true) {} else {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -144,7 +144,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if(true) {} else {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -155,7 +155,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if(true) {} else {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -168,11 +168,11 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if (true) {} else if(false) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -182,11 +182,11 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if   (true) {} else if(false) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -202,7 +202,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if(true) {} else if(false) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -219,7 +219,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if(true) {} else if(false) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -230,7 +230,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if(true) {} else if(false) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -243,11 +243,11 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if (true) {} else if(false) {} else {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -257,11 +257,11 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if   (true) {} else if(false) {} else {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -277,7 +277,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if(true) {} else if(false) {} else {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -294,7 +294,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if(true) {} else if(false) {} else {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -305,7 +305,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |fun foo() {
       |  if(true) {} else if(false) {} else {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -320,11 +320,11 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |    true
       |  ) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -336,11 +336,11 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |    true
       |  ) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 2, column = 3)
+    assertThat(findings).hasStartSourceLocation(line = 2, column = 3)
   }
 
   @Test
@@ -360,7 +360,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |    true
       |  ) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -381,7 +381,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |    true
       |  ) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
   }
 
@@ -394,7 +394,7 @@ class NoWhitespaceAfterIfAutoCorrectTest {
       |    true
       |  ) {}
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()

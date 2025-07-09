@@ -18,11 +18,11 @@ class NewlineForMultilineElseTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 4, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 4, column = 5)
   }
 
   @Test
@@ -37,7 +37,7 @@ class NewlineForMultilineElseTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -57,11 +57,11 @@ class NewlineForMultilineElseTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).hasSize(1)
-    assertThat(findings).hasSourceLocation(line = 7, column = 5)
+    assertThat(findings).hasStartSourceLocation(line = 7, column = 5)
   }
 
   @Test
@@ -79,7 +79,7 @@ class NewlineForMultilineElseTest {
       |  
       |  }
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()
@@ -92,7 +92,7 @@ class NewlineForMultilineElseTest {
       |fun foo() {
       |  if(true) continue else continue
       |}
-      """.trimMargin()
+      """.trimMargin(),
     )
 
     assertThat(findings).isEmpty()

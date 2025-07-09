@@ -16,14 +16,14 @@ import org.jetbrains.kotlin.psi.KtTryExpression
 import org.jetbrains.kotlin.psi.KtWhenExpression
 import org.jetbrains.kotlin.psi.KtWhileExpression
 
-class NoWhitespaceAfterKeyword(
-  ruleSetConfig: Config = Config.empty
+public class NoWhitespaceAfterKeyword(
+  ruleSetConfig: Config = Config.empty,
 ) : Rule(ruleSetConfig) {
-  override val issue = Issue(
+  override val issue: Issue = Issue(
     javaClass.simpleName,
     Severity.Style,
     "Reports improper spacing around keywords",
-    Debt.FIVE_MINS
+    Debt.FIVE_MINS,
   )
 
   override fun visitWhenExpression(expression: KtWhenExpression) {
@@ -109,8 +109,8 @@ class NoWhitespaceAfterKeyword(
       CodeSmell(
         issue,
         Entity.from(expression),
-        issue.description
-      )
+        issue.description,
+      ),
     )
   }
 }

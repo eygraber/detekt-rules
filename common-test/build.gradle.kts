@@ -1,8 +1,9 @@
 plugins {
-  `rules-project`
-  detekt
+  kotlin("jvm")
+  id("com.eygraber.conventions-kotlin-library")
+  id("com.eygraber.conventions-detekt")
 }
 
 dependencies {
-  implementation("io.gitlab.arturbosch.detekt:detekt-test:${detektVersion}")
+  implementation(libs.detektTest)
 }

@@ -4,11 +4,11 @@ import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
 
-class StyleRuleSetProvider : RuleSetProvider {
-  override val ruleSetId = "style-eygraber"
+public class StyleRuleSetProvider : RuleSetProvider {
+  override val ruleSetId: String = "style-eygraber"
 
-  override fun instance(config: Config) = RuleSet(
+  override fun instance(config: Config): RuleSet = RuleSet(
     ruleSetId,
-    listOf(NewlineForMultilineKeyword(config))
+    listOf(NewlineForMultilineKeyword(config)),
   )
 }
