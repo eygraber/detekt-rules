@@ -9,7 +9,10 @@
     {
       "groupName": "gradle-conventions",
       "matchPackagePrefixes": ["com.eygraber.conventions"],
-      "automerge": true
+      "automerge": true,
+      "registryUrls": [
+        "https://repo.maven.apache.org/maven2/"
+      ]
     },
     {
       "groupName": "gradle-develocity-plugin",
