@@ -1,6 +1,6 @@
 package com.eygraber.detekt.rules.style
 
-import com.pinterest.ktlint.rule.engine.core.api.indent
+import com.pinterest.ktlint.rule.engine.core.api.indentWithoutNewlinePrefix
 import io.gitlab.arturbosch.detekt.api.CodeSmell
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.Debt
@@ -41,7 +41,7 @@ public class NewlineForMultilineKeyword(
         withAutoCorrect {
           elseKeyword.prevSibling.node.treeParent.replaceChild(
             elseKeyword.prevSibling.node,
-            PsiWhiteSpaceImpl("\n${expression.node.indent(includeNewline = false)}"),
+            PsiWhiteSpaceImpl("\n${expression.node.indentWithoutNewlinePrefix}"),
           )
         }
       }
@@ -61,7 +61,7 @@ public class NewlineForMultilineKeyword(
           autoCorrects += {
             catch.prevSibling.node.treeParent.replaceChild(
               catch.prevSibling.node,
-              PsiWhiteSpaceImpl("\n${expression.node.indent(includeNewline = false)}"),
+              PsiWhiteSpaceImpl("\n${expression.node.indentWithoutNewlinePrefix}"),
             )
           }
         }
@@ -76,7 +76,7 @@ public class NewlineForMultilineKeyword(
           autoCorrects += {
             finallyBlock.prevSibling.node.treeParent.replaceChild(
               finallyBlock.prevSibling.node,
-              PsiWhiteSpaceImpl("\n${expression.node.indent(includeNewline = false)}"),
+              PsiWhiteSpaceImpl("\n${expression.node.indentWithoutNewlinePrefix}"),
             )
           }
         }
