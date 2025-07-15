@@ -28,10 +28,11 @@ public class NewlineForMultilineKeyword(
     // println(expression.elseKeyword?.prevSibling?.text?.contains("\n") == true)
     val elseExpression = expression.`else` ?: return
 
-    val shouldHandle = expression.then is KtBlockExpression && when(elseExpression) {
-      is KtIfExpression -> elseExpression.then is KtBlockExpression // handles else if
-      else -> elseExpression is KtBlockExpression
-    }
+    val shouldHandle = expression.then is KtBlockExpression &&
+      when(elseExpression) {
+        is KtIfExpression -> elseExpression.then is KtBlockExpression // handles else if
+        else -> elseExpression is KtBlockExpression
+      }
 
     if(shouldHandle) {
       val elseKeyword = expression.elseKeyword ?: return
