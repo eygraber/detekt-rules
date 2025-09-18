@@ -28,5 +28,5 @@ detektTest = { module = "io.gitlab.arturbosch.detekt:detekt-test", version.ref =
 
 ktlintCore = { module = "com.pinterest.ktlint:ktlint-rule-engine-core", version.ref = "ktlint" }
 
-test-assertj = "org.assertj:assertj-core:3.27.4"
+test-assertj = "org.assertj:assertj-core:3.27.5"
 test-junit = "junit:junit:4.13.2"
