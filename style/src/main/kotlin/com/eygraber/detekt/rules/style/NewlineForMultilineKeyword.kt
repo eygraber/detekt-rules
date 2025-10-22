@@ -1,29 +1,21 @@
 package com.eygraber.detekt.rules.style
 
-import com.pinterest.ktlint.rule.engine.core.api.indentWithoutNewlinePrefix
-import io.gitlab.arturbosch.detekt.api.CodeSmell
-import io.gitlab.arturbosch.detekt.api.Config
-import io.gitlab.arturbosch.detekt.api.Debt
-import io.gitlab.arturbosch.detekt.api.Entity
-import io.gitlab.arturbosch.detekt.api.Issue
-import io.gitlab.arturbosch.detekt.api.Rule
-import io.gitlab.arturbosch.detekt.api.Severity
-import org.jetbrains.kotlin.com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
+import com.intellij.psi.PsiElement
+import com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
+import dev.detekt.api.Config
+import dev.detekt.api.Entity
+import dev.detekt.api.Finding
+import dev.detekt.api.Rule
 import org.jetbrains.kotlin.psi.KtBlockExpression
 import org.jetbrains.kotlin.psi.KtIfExpression
 import org.jetbrains.kotlin.psi.KtTryExpression
 
 public class NewlineForMultilineKeyword(
   ruleSetConfig: Config = Config.empty,
-) : Rule(ruleSetConfig) {
-  override val issue: Issue = Issue(
-    javaClass.simpleName,
-    Severity.Style,
-    "Multiline keyword was found that was not on a new line.",
-    Debt.FIVE_MINS,
-  )
-
+) : Rule(
+  config = ruleSetConfig,
+  description = "Multiline keyword was found that was not on a new line.",
+) {
   override fun visitIfExpression(expression: KtIfExpression) {
     // println(expression.elseKeyword?.prevSibling?.text?.contains("\n") == true)
     val elseExpression = expression.`else` ?: return
@@ -39,7 +31,7 @@ public class NewlineForMultilineKeyword(
       if(!elseKeyword.prevSibling.text.startsWith('\n')) {
         report(elseKeyword)
 
-        withAutoCorrect {
+        if(autoCorrect) {
           elseKeyword.prevSibling.node.treeParent.replaceChild(
             elseKeyword.prevSibling.node,
             PsiWhiteSpaceImpl("\n${expression.node.indentWithoutNewlinePrefix}"),
@@ -58,7 +50,7 @@ public class NewlineForMultilineKeyword(
       if(!catch.prevSibling.text.startsWith('\n')) {
         report(catch)
 
-        withAutoCorrect {
+        if(autoCorrect) {
           autoCorrects += {
             catch.prevSibling.node.treeParent.replaceChild(
               catch.prevSibling.node,
@@ -73,7 +65,7 @@ public class NewlineForMultilineKeyword(
       if(!finallyBlock.prevSibling.text.startsWith('\n')) {
         report(finallyBlock)
 
-        withAutoCorrect {
+        if(autoCorrect) {
           autoCorrects += {
             finallyBlock.prevSibling.node.treeParent.replaceChild(
               finallyBlock.prevSibling.node,
@@ -84,7 +76,7 @@ public class NewlineForMultilineKeyword(
       }
     }
 
-    withAutoCorrect {
+    if(autoCorrect) {
       for(autoCorrect in autoCorrects) {
         autoCorrect()
       }
@@ -93,10 +85,9 @@ public class NewlineForMultilineKeyword(
 
   private fun report(element: PsiElement) {
     report(
-      CodeSmell(
-        issue,
-        Entity.from(element),
-        issue.description,
+      Finding(
+        entity = Entity.from(element),
+        message = description,
       ),
     )
   }
