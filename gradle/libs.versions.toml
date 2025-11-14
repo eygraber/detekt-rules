@@ -8,7 +8,7 @@ conventions = "0.0.89"
 
 kotlin = "2.2.21"
 
-ktlint = "1.7.1"
+ktlint = "1.8.0"
 
 publish = "0.35.0"
 
