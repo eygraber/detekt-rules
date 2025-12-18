@@ -7,10 +7,10 @@ plugins {
 
 dependencies {
   implementation(libs.detektApi)
-  implementation(libs.ktlintCore)
 
   testImplementation(projects.commonTest)
   testImplementation(libs.detektTest)
+  testImplementation(libs.detektTestAssertj)
   testImplementation(libs.test.assertj)
   testImplementation(libs.test.junit)
 }

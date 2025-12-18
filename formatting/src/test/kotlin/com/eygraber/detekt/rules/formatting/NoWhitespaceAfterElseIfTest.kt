@@ -1,8 +1,10 @@
 package com.eygraber.detekt.rules.formatting
 
-import io.gitlab.arturbosch.detekt.api.SourceLocation
-import io.gitlab.arturbosch.detekt.test.assertThat
-import io.gitlab.arturbosch.detekt.test.lint
+import com.eygraber.detekt.rules.common.test.hasStartSourceLocation
+import com.eygraber.detekt.rules.common.test.hasStartSourceLocations
+import dev.detekt.api.SourceLocation
+import dev.detekt.test.assertj.assertThat
+import dev.detekt.test.lint
 import org.junit.Test
 
 class NoWhitespaceAfterElseIfTest {
