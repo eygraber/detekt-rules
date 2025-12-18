@@ -1,10 +1,10 @@
 [versions]
 detekt = "2.0.0-alpha.1"
-detektEygraber = "1.0.13-detekt2"
+detektEygraber = "1.0.14"
 
 dokka = "2.1.0"
 
-conventions = "0.0.89-detekt2"
+conventions = "0.0.91"
 
 kotlin = "2.3.0"
 
