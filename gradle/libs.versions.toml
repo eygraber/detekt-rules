@@ -1,10 +1,10 @@
 [versions]
-detekt = "1.23.8"
-detektEygraber = "1.0.12"
+detekt = "2.0.0-alpha.1"
+detektEygraber = "1.0.13-detekt2"
 
 dokka = "2.1.0"
 
-conventions = "0.0.89"
+conventions = "0.0.89-detekt2"
 
 kotlin = "2.3.0"
 
@@ -16,17 +16,19 @@ publish = "0.35.0"
 conventions = { id = "com.eygraber.conventions", version.ref = "conventions" }
 
 [libraries]
-buildscript-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+buildscript-detekt = { module = "dev.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 buildscript-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
 
-detektApi = { module = "io.gitlab.arturbosch.detekt:detekt-api", version.ref = "detekt" }
+detektApi = { module = "dev.detekt:detekt-api", version.ref = "detekt" }
 detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
 detektEygraber-style = { module = "com.eygraber.detekt.rules:style", version.ref = "detektEygraber" }
-detektTest = { module = "io.gitlab.arturbosch.detekt:detekt-test", version.ref = "detekt" }
+detektTest = { module = "dev.detekt:detekt-test", version.ref = "detekt" }
+detektTestAssertj = { module = "dev.detekt:detekt-test-assertj", version.ref = "detekt" }
 
-ktlintCore = { module = "com.pinterest.ktlint:ktlint-rule-engine-core", version.ref = "ktlint" }
+# not actually used; just here so renovate picks it up
+ktlint = { module = "com.pinterest.ktlint:ktlint-bom", version.ref = "ktlint" }
 
 test-assertj = "org.assertj:assertj-core:3.27.6"
 test-junit = "junit:junit:4.13.2"

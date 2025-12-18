@@ -1,14 +1,18 @@
 package com.eygraber.detekt.rules.formatting
 
-import io.gitlab.arturbosch.detekt.api.Config
-import io.gitlab.arturbosch.detekt.api.RuleSet
-import io.gitlab.arturbosch.detekt.api.RuleSetProvider
+import dev.detekt.api.RuleName
+import dev.detekt.api.RuleSet
+import dev.detekt.api.RuleSetProvider
 
 public class FormattingRuleSetProvider : RuleSetProvider {
-  override val ruleSetId: String = "formatting-eygraber"
+  override val ruleSetId: RuleSet.Id = RuleSet.Id("formatting-eygraber")
 
-  override fun instance(config: Config): RuleSet = RuleSet(
-    ruleSetId,
-    listOf(NoWhitespaceAfterKeyword(config)),
+  override fun instance(): RuleSet = RuleSet(
+    id = ruleSetId,
+    rules = mapOf(
+      RuleName("NoWhitespaceAfterKeyword") to { config ->
+        NoWhitespaceAfterKeyword(config)
+      },
+    ),
   )
 }

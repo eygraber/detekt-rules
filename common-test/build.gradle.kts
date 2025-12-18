@@ -6,4 +6,6 @@ plugins {
 
 dependencies {
   implementation(libs.detektTest)
+  implementation(libs.detektTestAssertj)
+  implementation(libs.test.assertj)
 }
