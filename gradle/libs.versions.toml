@@ -30,5 +30,5 @@ detektTestAssertj = { module = "dev.detekt:detekt-test-assertj", version.ref = "
 # not actually used; just here so renovate picks it up
 ktlint = { module = "com.pinterest.ktlint:ktlint-bom", version.ref = "ktlint" }
 
-test-assertj = "org.assertj:assertj-core:3.27.6"
+test-assertj = "org.assertj:assertj-core:3.27.7"
 test-junit = "junit:junit:4.13.2"
