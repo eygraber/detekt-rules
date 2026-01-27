@@ -30,5 +30,9 @@ detektTestAssertj = { module = "dev.detekt:detekt-test-assertj", version.ref = "
 # not actually used; just here so renovate picks it up
 ktlint = { module = "com.pinterest.ktlint:ktlint-bom", version.ref = "ktlint" }
 
+ktlintRuleEngine = { module = "com.pinterest.ktlint:ktlint-rule-engine-core", version.ref = "ktlint" }
+ktlintCliRulesetCore = { module = "com.pinterest.ktlint:ktlint-cli-ruleset-core", version.ref = "ktlint" }
+ktlintTest = { module = "com.pinterest.ktlint:ktlint-test", version.ref = "ktlint" }
+
 test-assertj = "org.assertj:assertj-core:3.27.7"
 test-junit = "junit:junit:4.13.2"
