@@ -1,6 +1,6 @@
 [versions]
 detekt = "2.0.0-alpha.2"
-detektEygraber = "1.0.14"
+detektEygraber = "1.0.15"
 
 dokka = "2.1.0"
 
