@@ -1,6 +1,5 @@
 [versions]
 detekt = "2.0.0-alpha.2"
-detektEygraber = "1.0.14"
 
 dokka = "2.1.0"
 
@@ -9,6 +8,7 @@ conventions = "0.0.98"
 kotlin = "2.3.0"
 
 ktlint = "1.8.0"
+ktlintCustomRules = "0.1.1"
 
 publish = "0.36.0"
 
@@ -22,13 +22,17 @@ buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", ver
 buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
 
 detektApi = { module = "dev.detekt:detekt-api", version.ref = "detekt" }
-detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
-detektEygraber-style = { module = "com.eygraber.detekt.rules:style", version.ref = "detektEygraber" }
 detektTest = { module = "dev.detekt:detekt-test", version.ref = "detekt" }
 detektTestAssertj = { module = "dev.detekt:detekt-test-assertj", version.ref = "detekt" }
 
+
 # not actually used; just here so renovate picks it up
+# noinspection UnusedVersionCatalogEntry
 ktlint = { module = "com.pinterest.ktlint:ktlint-bom", version.ref = "ktlint" }
+
+# just here so renovate picks it up
+# noinspection UnusedVersionCatalogEntry
+ktlintCustomRules = { module = "com.eygraber.ktlint.rules:ktlint-rules", version.ref = "ktlintCustomRules" }
 
 test-assertj = "org.assertj:assertj-core:3.27.7"
 test-junit = "junit:junit:4.13.2"

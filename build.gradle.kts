@@ -19,11 +19,6 @@ plugins {
 project.deleteRootBuildDirWhenCleaning()
 
 gradleConventionsDefaults {
-  detekt {
-    plugins(libs.detektEygraber.formatting)
-    plugins(libs.detektEygraber.style)
-  }
-
   kotlin {
     jvmTargetVersion = JvmTarget.JVM_11
     explicitApiMode = ExplicitApiMode.Strict
