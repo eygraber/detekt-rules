@@ -44,7 +44,7 @@ jobs:
           gradle-version: wrapper
 
       - name: Run detekt
-        run: ./gradlew detektMain
+        run: ./gradlew detektMain detektTest
 
   run_ktlint:
     runs-on: ubuntu-latest
