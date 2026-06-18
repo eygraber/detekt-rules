@@ -12,7 +12,7 @@ jobs:
   publish_release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           token: ${{ secrets.PUSH_PAT }}
 
@@ -90,7 +90,7 @@ jobs:
           tag: ${{ env.RELEASE_VERSION }}
           token: ${{ secrets.PUSH_PAT }}
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.head_ref }}
           token: ${{ secrets.PUSH_PAT }}
